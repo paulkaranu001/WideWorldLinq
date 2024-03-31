@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using WideWorldLinq.Models;
 
 namespace WideWorldLinq.Data;
@@ -80,9 +81,33 @@ public partial class WideWorldImportersContext : DbContext
 
     public virtual DbSet<VehicleTemperature> VehicleTemperatures { get; set; }
 
+    //    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+    //        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-A2KPPT3;Initial Catalog=WideWorldImporters;Integrated Security=True;Encrypt=True");
+
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=DESKTOP-A2KPPT3;Initial Catalog=WideWorldImporters;Integrated Security=True;Encrypt=True");
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+
+            // Navigate to the project root directory (up three folders)
+            var projectRoot = Path.GetFullPath(Path.Combine(currentDirectory, "..", "..", ".."));
+
+            // Path to secrets.json file
+            var secretsPath = Path.Combine(projectRoot, "secrets.json");
+
+
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile(secretsPath)
+                .Build();
+
+            var connectionString = configuration.GetConnectionString("WideWorldImportersConnection");
+
+            optionsBuilder.UseSqlServer(connectionString);
+        }
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
