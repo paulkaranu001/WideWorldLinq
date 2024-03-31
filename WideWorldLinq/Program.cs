@@ -3,5 +3,5 @@ Console.WriteLine("Hello, Kenya");
 Console.WriteLine("Hello, Uganda");
 public class LINQGG
 {
-
+// new classs
 }
