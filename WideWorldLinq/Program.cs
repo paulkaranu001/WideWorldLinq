@@ -3,6 +3,9 @@ using WideWorldLinq.Scenarios;
 
 Console.WriteLine("Hello, Kenya");
 Console.WriteLine("Hello, Uganda");
-var topCustomerScenario = new TopCustomersScenario();
+//var topCustomerScenario = new TopCustomersScenario();
 
-await topCustomerScenario.RunAsync();
+//await topCustomerScenario.RunAsync();
+
+var ordersSimple = new OrdersSimple();
+await ordersSimple.RunAsync();
