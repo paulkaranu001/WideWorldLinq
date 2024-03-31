@@ -9,3 +9,5 @@ Console.WriteLine("Hello, Uganda");
 
 var ordersSimple = new OrdersSimple();
 await ordersSimple.RunAsync();
+var highestTemp = new HighestTemp();
+await highestTemp.RunAsync();
