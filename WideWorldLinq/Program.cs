@@ -11,3 +11,5 @@ var ordersSimple = new OrdersSimple();
 await ordersSimple.RunAsync();
 var highestTemp = new HighestTemp();
 await highestTemp.RunAsync();
+var cities = new CitiesWithHighestPopulation();
+await cities.RunAsync();
