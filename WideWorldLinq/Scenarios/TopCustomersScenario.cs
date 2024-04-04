@@ -1,13 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WideWorldLinq.Data;
-
-namespace WideWorldLinq.Scenarios
+﻿namespace WideWorldLinq.Scenarios
 {
     public class TopCustomersScenario
     {
